@@ -78,9 +78,22 @@ public class UniqueAppealList implements Iterable<Appeal> {
      * Replaces the contents of this list with {@code appeals}.
      * {@code appeals} must not contain duplicate appeals.
      */
-    public void setAppeal(UniqueAppealList replacement) {
+    public void setAppeals(UniqueAppealList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code students}.
+     * {@code students} must not contain duplicate students.
+     */
+    public void setAppeals(List<Appeal> appeals) {
+        CollectionUtil.requireAllNonNull(appeals);
+        if (!appealsAreUnique(appeals)) {
+            throw new DuplicateAppealException();
+        }
+
+        internalList.setAll(appeals);
     }
 
     /**

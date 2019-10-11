@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import mams.commons.core.GuiSettings;
+import mams.model.appeal.Appeal;
 import mams.model.student.Student;
 
 /**
@@ -13,6 +14,7 @@ import mams.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+    Predicate<Appeal> PREDICATE_SHOW_ALL_APPEALS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,4 +87,35 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+
+    /**
+     *
+     * Returns true if a appeal with the same identity as {@code appeal} exists in the appeal list
+     */
+    boolean hasAppeal(Appeal appeal);
+
+    /**
+     * Adds the given appeal.
+     * {@code appeal} must not already exist in the appeal list.
+     *
+     */
+    void addAppeal(Appeal appeal);
+
+    /**
+     * Replaces the given appeal {@code target} with {@code editedAppeal}.
+     * {@code target} must exist in the appeal list.
+     * The appeal identity of {@code editedAppeal} must not be
+     * the same as another existing student in the appeal list.
+     */
+    void setAppeal(Appeal target, Appeal approvedAppeal);
+
+    /**
+     * Updates the filter of the filtered appeal list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAppealList(Predicate<Appeal> predicate);
+
+    /** Returns an unmodifiable view of the filtered appeal list */
+    ObservableList<Appeal> getFilteredAppealList();
 }

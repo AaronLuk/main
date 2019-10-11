@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import mams.model.appeal.Appeal;
+import mams.model.appeal.UniqueAppealList;
 import mams.model.student.Student;
 import mams.model.student.UniqueStudentList;
 
@@ -15,6 +17,7 @@ import mams.model.student.UniqueStudentList;
 public class Mams implements ReadOnlyMams {
 
     private final UniqueStudentList students;
+    private final UniqueAppealList appeals;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class Mams implements ReadOnlyMams {
      */
     {
         students = new UniqueStudentList();
+        appeals = new UniqueAppealList();
     }
 
     public Mams() {}
@@ -46,6 +50,15 @@ public class Mams implements ReadOnlyMams {
     public void setStudents(List<Student> students) {
         this.students.setStudents(students);
     }
+
+    /**
+     * Replaces the contents of the student list with {@code appeals}.
+     * {@code students} must not contain duplicate students.
+     */
+    public void setAppeals(List<Appeal> appeals) {
+        this.appeals.setAppeals(appeals);
+    }
+
 
     /**
      * Resets the existing data of this {@code Mams} with {@code newData}.
@@ -94,6 +107,36 @@ public class Mams implements ReadOnlyMams {
         students.remove(key);
     }
 
+    /// appeal-level operations
+    /**
+     * Returns true if a appeal with the same identity as {@code appeal} exists in the appeal list.
+     */
+    public boolean hasAppeal(Appeal appeal) {
+        requireNonNull(appeal);
+        return appeals.contains(appeal);
+    }
+
+    /**
+     * Adds a appeal to the appeal list.
+     * The appeal must not already exist in the appeal list.
+     */
+    public void addAppeal(Appeal p) {
+         appeals.add(p);
+    }
+
+    /**
+     * Replaces the given appeal {@code target} in the list with {@code approvedAppeal}.
+     * {@code target} must exist in the address book.
+     * The appeal identity of {@code approvedAppeal} must not be the
+     * same as another existing appeal in the appeal list.
+     */
+    public void setAppeal(Appeal target, Appeal approvedAppeal) {
+        requireNonNull(approvedAppeal);
+
+        appeals.setAppeal(target, approvedAppeal);
+    }
+
+
     //// util methods
 
     @Override
@@ -105,6 +148,11 @@ public class Mams implements ReadOnlyMams {
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Appeal> getAppealList() {
+        return appeals.asUnmodifiedObservableList();
     }
 
     @Override
