@@ -53,7 +53,7 @@ public class ApproveCommand extends Command {
 
         Appeal appealToApprove = lastShownList.get(index.getZeroBased());
 
-        if (!appealToApprove.getResult().equals("APPROVED")) {
+        if (!appealToApprove.getResult().equalsIgnoreCase("APPROVED")) {
             Appeal approvedAppeal = new Appeal(appealToApprove.getAppealId(), appealToApprove.getAppealType(), appealToApprove.getStudentId(), appealToApprove.getAcademicYear(), appealToApprove.getStudentWorkload(), appealToApprove.getAppealDescription(),
                     appealToApprove.getPreviousModule(), appealToApprove.getNewModule(), appealToApprove.getModule_to_add(), appealToApprove.getModule_to_drop(), true, "APPROVED",remark);
 

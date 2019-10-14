@@ -108,11 +108,10 @@ public class UniqueAppealList implements Iterable<Appeal> {
     }
 
 
-
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Appeal> asUnmodifiedObservableList() {
+    public ObservableList<Appeal> asUnmodifiableObservableList() {
         return internalUnmodifiedList;
     }
 
