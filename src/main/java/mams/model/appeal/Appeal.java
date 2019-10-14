@@ -10,6 +10,23 @@ import mams.commons.util.CollectionUtil;
  */
 public class Appeal {
 
+    public static final String MESSAGE_CONSTRAINTS_APPEAL_ID =
+            "Appeals should start with 'C' followed by a 6 digit number";
+
+    public static final String MESSAGE_CONSTRAINTS_APPEAL_TYPE =
+            "Appeals should be either add module, remove module or increase workload";
+
+    /**
+     * "C" followed by strictly 6 digits.
+     */
+    public static final String VALIDATION_REGEX_APPEAL_CODE = "C\\d{6}$";
+
+    /**
+     * "AY" followed by 4 digit year
+     */
+    public static final String MESSAGE_CONSTRAINTS_ACADEMIC_YEAR =
+            "Academic year should start with AY";
+    //Identity fields
     private final String appealId;
     private final String appealType;
     private final String studentId;
@@ -24,6 +41,9 @@ public class Appeal {
     private final String result;
     private final String remark;
     private boolean isModified;
+
+
+
 
     /**
      * Constructor for Appeal object when it is loaded from file
@@ -53,9 +73,7 @@ public class Appeal {
                   boolean resolved,
                   String remark) {
 
-        CollectionUtil.requireAllNonNull(appealId, appealType, studentId, academicYear,
-                studentWorkload, appealDescription, previousModule,
-                newModule, moduleToAdd, moduleToDrop, resolved, remark);
+        CollectionUtil.requireAllNonNull(appealId, appealType, studentId, academicYear, appealDescription);
         this.appealId = appealId;
         this.appealType = appealType;
         this.studentId = studentId;
@@ -105,8 +123,7 @@ public class Appeal {
                   String remark) {
 
         CollectionUtil.requireAllNonNull(appealId, appealType, studentId, academicYear,
-                studentWorkload, appealDescription, previousModule,
-                newModule, moduleToAdd, moduleToDrop, resolved, result, remark);
+                studentWorkload, appealDescription);
         this.appealId = appealId;
         this.appealType = appealType;
         this.studentId = studentId;
@@ -232,7 +249,7 @@ public class Appeal {
                 .append(getAcademicYear())
                 .append(" Student workload: ")
                 .append(getStudentWorkload())
-                .append(" Previous module: " )
+                .append(" Previous module: ")
                 .append(getPreviousModule())
                 .append(" New module: ")
                 .append(getNewModule())
@@ -244,7 +261,7 @@ public class Appeal {
                 .append(isResolved())
                 .append(" Result: ")
                 .append(getResult())
-                .append(" Remarks: " )
+                .append(" Remarks: ")
                 .append(getRemark());
         return builder.toString();
     }
@@ -274,4 +291,22 @@ public class Appeal {
         }
         return appeal;
     }
+
+    /**
+     * Returns true if a given string is a valid appeal Id.
+     */
+    public static boolean isValidAppealId(String test) {
+        return test.matches(VALIDATION_REGEX_APPEAL_CODE);
+    }
+
+    /**
+     * Returns true if given string is of correct type
+     */
+    public static boolean isValidAppealType(String test) {
+        return test.equalsIgnoreCase("increase workload")
+                || test.equalsIgnoreCase("add module")
+                || test.equalsIgnoreCase("remove module");
+    }
+
+
 }

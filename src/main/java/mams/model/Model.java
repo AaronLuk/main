@@ -5,7 +5,11 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import mams.commons.core.GuiSettings;
+
 import mams.model.appeal.Appeal;
+
+import mams.model.module.Module;
+
 import mams.model.student.Student;
 
 /**
@@ -14,7 +18,11 @@ import mams.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+
     Predicate<Appeal> PREDICATE_SHOW_ALL_APPEALS = unused -> true;
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Module> PREDICATE_SHOW_ALL_MODULE = unused -> true;
+
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -60,16 +68,34 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     *
+     * Returns true if a module with the same identity as {@code module} exists in MAMS.
+     */
+    boolean hasModule(Module module);
+
+    /**
      * Deletes the given student.
      * The student must exist in the address book.
      */
     void deleteStudent(Student target);
 
     /**
+     * Deletes the given module.
+     * The module must exist in the address book.
+     */
+    void deleteModule(Module target);
+
+    /**
      * Adds the given student.
      * {@code student} must not already exist in the address book.
      */
     void addStudent(Student student);
+
+    /**
+     * Adds the given module.
+     * {@code module} must not already exist in the address book.
+     */
+    void addModule(Module module);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
@@ -79,14 +105,28 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
+    /**
+     * Replaces the given module {@code target} with {@code editedModule}.
+     * {@code target} must exist in the address book.
+     * The module identity of {@code editedModule} must not be
+     * the same as another existing module in the address book.
+     */
+    void setModule(Module target, Module editedModule);
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
+
+    /** Returns an unmodifiable view of the filtered module list */
+    ObservableList<Module> getFilteredModuleList();
+
+    // TODO add getter method for appeal list
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
 
 
     /**
@@ -118,4 +158,11 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered appeal list */
     ObservableList<Appeal> getFilteredAppealList();
+
+    /**
+     * Updates the filter of the filtered module list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredModuleList(Predicate<Module> predicate);
+
 }
