@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import mams.commons.core.Messages;
-<<<<<<< HEAD
+
 import mams.logic.commands.*;
-=======
+
 import mams.logic.commands.ClashCommand;
 import mams.logic.commands.Command;
 import mams.logic.commands.EditCommand;
@@ -14,7 +14,7 @@ import mams.logic.commands.ExitCommand;
 import mams.logic.commands.FindCommand;
 import mams.logic.commands.HelpCommand;
 import mams.logic.commands.ListCommand;
->>>>>>> f4c4f68b6d4bcb2d0266f5ba779b40aa2ff05356
+
 import mams.logic.parser.exceptions.ParseException;
 
 /**

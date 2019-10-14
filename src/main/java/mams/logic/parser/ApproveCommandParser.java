@@ -11,7 +11,8 @@ import mams.logic.commands.ApproveCommand;
 import mams.logic.parser.exceptions.ParseException;
 
 
-public class ApproveCommandParser {
+public class ApproveCommandParser implements Parser<ApproveCommand>{
+
     /**
      * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
      * and returns a {@code RemarkCommand} object for execution.

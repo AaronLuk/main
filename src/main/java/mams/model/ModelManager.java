@@ -167,7 +167,9 @@ public class ModelManager implements Model {
         CollectionUtil.requireAllNonNull(target, approvedAppeal);
 
         mams.setAppeal(target, approvedAppeal);
+    }
 
+    @Override
     public void setModule(Module target, Module editedModule) {
         CollectionUtil.requireAllNonNull(target, editedModule);
 
