@@ -1,5 +1,6 @@
 {
   "students" : [ {
+<<<<<<< HEAD
     "name" : "Paul",
     "credits" : "20",
     "prevMods" : "CS2202, CS5505",
@@ -11,6 +12,19 @@
     "prevMods" : "CS2202, CS1111",
     "matricId" : "A220193040F",
     "tagged" : [ "C123456", "C002923" ]
+=======
+    "name": "Paul",
+    "credits": "20",
+    "prevMods": "CS2202, CS5505",
+    "matricId": "A00192034Z",
+    "tagged": ["C123456", "C002923"]
+  }, {
+    "name": "Alex",
+    "credits": "20",
+    "prevMods": "CS2202, CS1111",
+    "matricId": "A220193040F",
+    "tagged": ["C123456", "C002923"]
+>>>>>>> 546bcc431657467dba566f2748f33e3594cff88d
   }, {
     "name" : "Alex Yeoh",
     "credits" : "20",
@@ -48,6 +62,10 @@
     "matricId" : "A015923848U",
     "tagged" : [ "colleagues" ]
   } ],
+<<<<<<< HEAD
+=======
+
+>>>>>>> 546bcc431657467dba566f2748f33e3594cff88d
   "modules" : [ {
     "quota" : "100",
     "tagged" : [ "A6185284H", "A5802229H", "A6614133H", "A5524592H", "A1748370H" ],
