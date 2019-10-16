@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import mams.commons.exceptions.IllegalValueException;
-
+import java.util.stream.Collectors;
 import mams.model.appeal.Appeal;
 import mams.model.module.Module;
 import mams.model.student.MatricId;
@@ -61,6 +61,7 @@ public class JsonAdaptedAppeal {
         this.resolved = resolved;
         this.result = result;
         this.remark = remark;
+
     }
 
     /**
