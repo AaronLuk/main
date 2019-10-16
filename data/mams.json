@@ -176,9 +176,9 @@
     "newModule" : "",
     "moduleToAdd" : "",
     "moduleToDrop" : "",
-    "resolved" : false,
-    "result" : null,
-    "remark" : ""
+    "resolved" : true,
+    "result" : "REJECTED",
+    "remark" : "cannot drop"
   }, {
     "appealId" : "C000003",
     "appealType" : "Add module",
