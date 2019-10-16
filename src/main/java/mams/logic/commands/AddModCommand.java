@@ -14,9 +14,9 @@ import mams.logic.commands.exceptions.CommandException;
 import mams.model.Model;
 
 import mams.model.student.Credits;
-import mams.model.student.Email;
 import mams.model.student.MatricId;
 import mams.model.student.Name;
+import mams.model.student.PrevMods;
 import mams.model.student.Student;
 import mams.model.tag.Tag;
 
@@ -28,11 +28,9 @@ public class AddModCommand extends Command {
     public static final String COMMAND_WORD = "addmod";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to a student in MAMS"
-            + "Session ID is optional"
             + "Parameters: "
             + "MATRIC_ID"
-            + "MODULE_CODE"
-            + "[SESSION_ID]";
+            + "MODULE_CODE";
 
     //TODO: message for success. userguide?
     public static final String MESSAGE_EDIT_STUDENT_MODULE_SUCCESS = "Edited Student: %1$s";
@@ -96,11 +94,11 @@ public class AddModCommand extends Command {
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Credits updatedCredits = editStudentDescriptor.getCredits().orElse(studentToEdit.getCredits());
-        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        PrevMods updatedPrevMods = editStudentDescriptor.getPrevMods().orElse(studentToEdit.getPrevMods());
         MatricId updatedMatricId = editStudentDescriptor.getMatricId().orElse(studentToEdit.getMatricId());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedCredits, updatedEmail, updatedMatricId, updatedTags);
+        return new Student(updatedName, updatedCredits, updatedPrevMods, updatedMatricId, updatedTags);
     }
 
     @Override
@@ -129,7 +127,7 @@ public class AddModCommand extends Command {
     public static class EditStudentDescriptor {
         private Name name;
         private Credits credits;
-        private Email email;
+        private PrevMods prevMods;
         private MatricId matricId;
         private Set<Tag> tags;
 
@@ -138,7 +136,7 @@ public class AddModCommand extends Command {
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             setName(toCopy.name);
             setCredits(toCopy.credits);
-            setEmail(toCopy.email);
+            setPrevMods(toCopy.prevMods);
             setMatricId(toCopy.matricId);
             setTags(toCopy.tags);
         }
@@ -147,7 +145,7 @@ public class AddModCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, credits, email, matricId, tags);
+            return CollectionUtil.isAnyNonNull(name, credits, prevMods, matricId, tags);
         }
 
         public void setName(Name name) {
@@ -166,12 +164,12 @@ public class AddModCommand extends Command {
             return Optional.ofNullable(credits);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setPrevMods(PrevMods prevMods) {
+            this.prevMods = prevMods;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<PrevMods> getPrevMods() {
+            return Optional.ofNullable(prevMods);
         }
 
         public void setMatricId(MatricId matricId) {
@@ -216,7 +214,7 @@ public class AddModCommand extends Command {
 
             return getName().equals(e.getName())
                     && getCredits().equals(e.getCredits())
-                    && getEmail().equals(e.getEmail())
+                    && getPrevMods().equals(e.getPrevMods())
                     && getMatricId().equals(e.getMatricId())
                     && getTags().equals(e.getTags());
         }
