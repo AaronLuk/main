@@ -20,7 +20,6 @@ public interface ReadOnlyMams {
     ObservableList<Student> getStudentList();
 
     /**
-<<<<<<< HEAD
      * Returns an unmodifiable view of the appeals list.
      * This list will not contain any duplicate appeals.
      */
@@ -30,5 +29,4 @@ public interface ReadOnlyMams {
      * This list will not contain any duplicate modules.
      */
     ObservableList<Module> getModuleList();
-
 }
