@@ -29,7 +29,6 @@ public class ApproveCommand extends Approve {
 
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Appeal> lastShownList = model.getFilteredAppealList();
